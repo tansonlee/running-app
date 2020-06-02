@@ -17,35 +17,33 @@ const Datastore = require("nedb");
 const db = new Datastore({ filename: "database.db", autoload: true });
 db.loadDatabase();
 
-db.insert(
-	{
-		name: "tanson",
-		food: "apple"
-	},
-	(err, newDoc) => {
-		if (err) {
-			console.log(err);
-		}
-		console.log(newDoc);
-	}
-);
-db.find({}, function(err, users) {
-	// Find all users in the collection
-	console.log(users);
-});
-
 // our default array of dreams
 const dreams = [ "Find and count some sheep", "Climb a really tall mountain", "Wash the dishes" ];
+
+dreams.forEach((dream) => {
+	db.insert({ dream: dream });
+});
 
 // https://expressjs.com/en/starter/basic-routing.html
 app.get("/", (request, response) => {
 	response.sendFile(__dirname + "/views/index.html");
 });
 
-// send the default array of dreams to the webpage
+// send the default array of dreams to webpage
 app.get("/dreams", (request, response) => {
 	// express helps us take JS objects and send them as JSON
 	response.json(dreams);
+});
+
+// send all the data from the database to webpage
+app.get("/data", (request, response) => {
+	db.find({}, (err, data) => {
+		if (err) {
+			response.end();
+			return;
+		}
+		response.json({ data });
+	});
 });
 
 // listen for requests :)
@@ -54,6 +52,7 @@ const listener = app.listen(port, () => {
 	console.log("Your app is listening on port " + listener.address().port);
 });
 
+// receive the added dream from webpage
 app.post("/dream", function(request, response) {
 	const data = { status: "success", dream: request.body.newDream };
 

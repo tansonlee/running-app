@@ -47,6 +47,7 @@ fetch("/dreams")
 				body: JSON.stringify(data)
 			};
 
+			// send the added dream to server
 			const response = await fetch("/dream", options);
 			const responseJSON = await response.json();
 			await console.log(responseJSON);
@@ -54,5 +55,14 @@ fetch("/dreams")
 			// reset form
 			dreamsForm.reset();
 			dreamsForm.elements.dream.focus();
+
+			getData();
 		});
 	});
+
+// receive data from database
+async function getData() {
+	const response = await fetch("/data");
+	const responseJSON = await response.json();
+	console.log(responseJSON.data);
+}
