@@ -161,8 +161,6 @@ start_div.addEventListener("click", () => {
 	}, 1000);
 });
 
-setInterval(logLocation, 1000);
-
 // stops logging location when clicked
 stop_div.addEventListener("click", () => {
 	start = false;
