@@ -5,8 +5,6 @@
 // but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require("express");
 const app = express();
-// const bodyParser = require('body-parser');
-// app.use(bodyParser.json());
 
 // make all the files in 'public' available
 // https://expressjs.com/en/starter/static-files.html
@@ -16,6 +14,12 @@ app.use(express.json({ limit: "1mb" }));
 const Datastore = require("nedb");
 const db = new Datastore({ filename: "database.db", autoload: true });
 db.loadDatabase();
+
+// listen for requests :)
+const port = 8000;
+const listener = app.listen(port, () => {
+	console.log("Your app is listening on port " + listener.address().port);
+});
 
 // our default array of dreams
 const dreams = [ "Find and count some sheep", "Climb a really tall mountain", "Wash the dishes" ];
@@ -46,16 +50,18 @@ app.get("/data", (request, response) => {
 	});
 });
 
-// listen for requests :)
-const port = 8000;
-const listener = app.listen(port, () => {
-	console.log("Your app is listening on port " + listener.address().port);
-});
-
 // receive the added dream from webpage
 app.post("/dream", function(request, response) {
 	const data = { status: "success", dream: request.body.newDream };
 
 	response.json(data);
 	db.insert({ dream: request.body.newDream });
+});
+
+// receive the added dream from webpage
+app.post("/location", function(request, response) {
+	const data = { status: "success", lat: request.body.lat, lon: request.body.lon };
+	response.json(data);
+	db.insert({ lat: request.body.lat, lon: request.body.lon });
+	console.log(data);
 });

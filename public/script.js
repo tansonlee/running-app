@@ -2,6 +2,8 @@
 // run by the browser each time the page is loaded
 
 console.log("hello world :o");
+let lat, lon;
+let tempLat, tempLon;
 
 // define variables that reference elements on our page
 const dreamsList = document.getElementById("dreams");
@@ -50,7 +52,7 @@ fetch("/dreams")
 			// send the added dream to server
 			const response = await fetch("/dream", options);
 			const responseJSON = await response.json();
-			await console.log(responseJSON);
+			console.log(responseJSON);
 
 			// reset form
 			dreamsForm.reset();
@@ -66,3 +68,43 @@ async function getData() {
 	const responseJSON = await response.json();
 	console.log(responseJSON.data);
 }
+
+function logLocation() {
+	if ("geolocation" in navigator) {
+		navigator.geolocation.getCurrentPosition(async (position) => {
+			lat = position.coords.latitude;
+			lon = position.coords.longitude;
+			const data = { lat, lon };
+
+			const options = {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(data)
+			};
+
+			// send the added dream to server
+			const response = await fetch("/location", options);
+			const responseJSON = await response.json();
+			console.log(responseJSON);
+		});
+	} else {
+		console.log("cannot determine location");
+		/* geolocation IS NOT available */
+	}
+}
+
+logLocation();
+setInterval(logLocation, 3000);
+
+// send location to server
+// async function sendLocation(lat, lon) {}
+
+// determineLocation();
+
+// setInterval(() => {
+// 	tempLat = lat;
+// 	tempLon = lon;
+// 	sendLocation(tempLat, tempLon);
+// }, 3000);
