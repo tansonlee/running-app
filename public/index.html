@@ -12,12 +12,19 @@
 
     <!-- <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon"> -->
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/main.css">
 
     <!-- import the webpage's client-side javascript file -->
-    <script src="/script.js" defer></script>
+    <script src="/main.js" defer></script>
   </head>
   <body>
+    <header>
+      <h1>Start Your Run Here</h1>
+    </header>
+
+
+    <a href="./data.html">Previous Logs</a>
+    <h2>Total Distance: <span id="distance">0</span>m</h2>
     <!-- <header>
       <h1>A Dream of the Future</h1>
     </header> -->
@@ -49,7 +56,7 @@
     <!-- <div class="glitchButton" style="position:fixed;top:2em;right:20px;"></div>
     <script src="https://button.glitch.me/button.js" defer></script> -->
   
-    <div id="gps-status" class="button">Determining...</div>
+    <div id="status" class="button">Start Your Run</div>
     <div id="start" class="button">Start</div>
     <div id="stop" class="button">Stop</div>
     <div id="delete" class="button">Delete All</div>

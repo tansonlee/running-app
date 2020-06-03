@@ -2,17 +2,30 @@
 // run by the browser each time the page is loaded
 
 console.log("hello world :o");
-let lat, lon;
-let tempLat, tempLon;
 let start = false;
 
 // // define variables that reference elements on our page
 // const dreamsList = document.getElementById("dreams");
 // const dreamsForm = document.querySelector("form");
-const gpsStatus_div = document.getElementById("gps-status");
+const status_div = document.getElementById("status");
 const start_div = document.getElementById("start");
 const stop_div = document.getElementById("stop");
 const delete_div = document.getElementById("delete");
+const distance_span = document.getElementById("distance");
+
+// given the lat lon of two pts, returns the distance between in METERS
+function distance(lat1, lon1, lat2, lon2) {
+	// generally used geo measurement function
+	const R = 6378.137; // Radius of earth in KM
+	const dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
+	const dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
+	const a =
+		Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+		Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+	const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+	const d = R * c;
+	return d * 1000; // meters
+}
 
 // // a helper function that creates a list item for a given dream
 // function appendNewDream(dream) {
@@ -67,32 +80,6 @@ const delete_div = document.getElementById("delete");
 // 		});
 // 	});
 
-async function showData() {
-	const data = await getData();
-	const dataArray = data.data;
-	dataArray.forEach((element) => {
-		const root = document.createElement("div");
-		root.setAttribute("class", "data-pack");
-		const location_div = document.createElement("div");
-		const date_div = document.createElement("div");
-
-		location_div.textContent = `${parseFloat(element.lat).toFixed(2)}°, ${parseFloat(element.lon).toFixed(2)}°`;
-		date_div.textContent = element.date;
-
-		root.append(location_div, date_div);
-		document.body.append(root);
-	});
-}
-
-// receive data from database
-async function getData() {
-	const response = await fetch("/data");
-	const responseJSON = await response.json();
-	return responseJSON;
-}
-
-showData();
-
 // async function main() {
 // 	const data = await getData();
 // 	const dataArray = data.data;
@@ -120,50 +107,100 @@ showData();
 // }
 
 // finds the location then sends it to the server
-function logLocation() {
-	if ("geolocation" in navigator) {
-		gpsStatus_div.textContent = "GPS Availible";
-		navigator.geolocation.getCurrentPosition(async (position) => {
-			lat = position.coords.latitude;
-			lon = position.coords.longitude;
-			const date = new Date();
+// function logLocation() {
+// 	if ("geolocation" in navigator) {
+// 		gpsStatus_div.textContent = "GPS Availible";
+// 		navigator.geolocation.getCurrentPosition(async (position) => {
+// 			lat = position.coords.latitude;
+// 			lon = position.coords.longitude;
+// 			const date = new Date();
 
-			const data = { lat, lon, date };
+// 			const data = { lat, lon, date };
 
-			console.log(data);
+// 			console.log(data);
 
-			const options = {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify(data)
-			};
+// 			const options = {
+// 				method: "POST",
+// 				headers: {
+// 					"Content-Type": "application/json"
+// 				},
+// 				body: JSON.stringify(data)
+// 			};
 
-			// send the added dream to server
-			const response = await fetch("/location", options);
-			const responseJSON = await response.json();
-		});
-	} else {
-		gpsStatus_div.textContent = "GPS NOT Availible";
-		console.log("cannot determine location");
-		/* geolocation IS NOT available */
+// 			// send the added dream to server
+// 			const response = await fetch("/location", options);
+// 			const responseJSON = await response.json();
+// 		});
+// 	} else {
+// 		gpsStatus_div.textContent = "GPS NOT Availible";
+// 		console.log("cannot determine location");
+// 		/* geolocation IS NOT available */
+// 	}
+// }
+
+async function logDistance(distance) {
+	const date = new Date();
+	const data = { distance, date };
+	console.log(data);
+
+	const options = {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(data)
+	};
+
+	// send the added dream to server
+	const response = await fetch("/distance", options);
+	const responseJSON = await response.json();
+	console.log(responseJSON);
+}
+
+let lat;
+let lon;
+let data;
+function giveLocation() {
+	navigator.geolocation.getCurrentPosition((position) => {
+		lat = position.coords.latitude;
+		lon = position.coords.longitude;
+		data = { lat, lon };
+	});
+	if (data) {
+		return data;
 	}
 }
 
+let totalDistance = 0;
 // starts logging location when clicked
 start_div.addEventListener("click", () => {
 	start = true;
+	let currentPosition = giveLocation();
+	let previousPosition;
 	setInterval(() => {
 		if (start) {
-			logLocation();
+			previousPosition = currentPosition;
+			currentPosition = giveLocation();
+			if (previousPosition && currentPosition) {
+				const distanceInterval = distance(
+					previousPosition.lat,
+					previousPosition.lon,
+					currentPosition.lat,
+					currentPosition.lon
+				);
+				totalDistance += distanceInterval;
+				console.log(distanceInterval);
+			}
+			distance_span.textContent = parseInt(totalDistance);
 		}
-	}, 1000);
+	}, 6000);
 });
 
 // stops logging location when clicked
 stop_div.addEventListener("click", () => {
 	start = false;
+	console.log(totalDistance);
+	logDistance(totalDistance);
 });
 
 // sends a request to server to delete database

@@ -30,7 +30,7 @@ const listener = app.listen(port, () => {
 
 // https://expressjs.com/en/starter/basic-routing.html
 app.get("/", (request, response) => {
-	response.sendFile(__dirname + "/views/index.html");
+	response.sendFile(__dirname + "/public/index.html");
 });
 
 // // send the default array of dreams to webpage
@@ -63,6 +63,14 @@ app.post("/location", function(request, response) {
 	const data = { status: "success", lat: request.body.lat, lon: request.body.lon };
 	response.json(data);
 	db.insert({ lat: request.body.lat, lon: request.body.lon, date: request.body.date });
+	console.log(data);
+});
+
+// receive the distance from webpage and insert to database
+app.post("/distance", function(request, response) {
+	const data = { status: "success", distance: request.body.distance };
+	response.json(data);
+	db.insert({ distance: request.body.distance, date: request.body.date });
 	console.log(data);
 });
 
