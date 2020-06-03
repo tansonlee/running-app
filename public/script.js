@@ -9,6 +9,7 @@ let start = false;
 // // define variables that reference elements on our page
 // const dreamsList = document.getElementById("dreams");
 // const dreamsForm = document.querySelector("form");
+const gpsStatus_div = document.getElementById("gps-status");
 const start_div = document.getElementById("start");
 const stop_div = document.getElementById("stop");
 const delete_div = document.getElementById("delete");
@@ -121,6 +122,7 @@ showData();
 // finds the location then sends it to the server
 function logLocation() {
 	if ("geolocation" in navigator) {
+		gpsStatus_div.textContent = "GPS Availible";
 		navigator.geolocation.getCurrentPosition(async (position) => {
 			lat = position.coords.latitude;
 			lon = position.coords.longitude;
@@ -143,6 +145,7 @@ function logLocation() {
 			const responseJSON = await response.json();
 		});
 	} else {
+		gpsStatus_div.textContent = "GPS NOT Availible";
 		console.log("cannot determine location");
 		/* geolocation IS NOT available */
 	}
@@ -157,6 +160,8 @@ start_div.addEventListener("click", () => {
 		}
 	}, 1000);
 });
+
+setInterval(logLocation, 1000);
 
 // stops logging location when clicked
 stop_div.addEventListener("click", () => {
