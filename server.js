@@ -21,23 +21,23 @@ const listener = app.listen(port, () => {
 	console.log("Your app is listening on port " + listener.address().port);
 });
 
-// our default array of dreams
-const dreams = [ "Find and count some sheep", "Climb a really tall mountain", "Wash the dishes" ];
+// // our default array of dreams
+// const dreams = [ "Find and count some sheep", "Climb a really tall mountain", "Wash the dishes" ];
 
-dreams.forEach((dream) => {
-	db.insert({ dream: dream });
-});
+// dreams.forEach((dream) => {
+// 	db.insert({ dream: dream });
+// });
 
 // https://expressjs.com/en/starter/basic-routing.html
 app.get("/", (request, response) => {
 	response.sendFile(__dirname + "/views/index.html");
 });
 
-// send the default array of dreams to webpage
-app.get("/dreams", (request, response) => {
-	// express helps us take JS objects and send them as JSON
-	response.json(dreams);
-});
+// // send the default array of dreams to webpage
+// app.get("/dreams", (request, response) => {
+// 	// express helps us take JS objects and send them as JSON
+// 	response.json(dreams);
+// });
 
 // send all the data from the database to webpage
 app.get("/data", (request, response) => {
@@ -50,18 +50,43 @@ app.get("/data", (request, response) => {
 	});
 });
 
-// receive the added dream from webpage
-app.post("/dream", function(request, response) {
-	const data = { status: "success", dream: request.body.newDream };
+// // receive the added dream from webpage
+// app.post("/dream", function(request, response) {
+// 	const data = { status: "success", dream: request.body.newDream };
 
-	response.json(data);
-	db.insert({ dream: request.body.newDream });
-});
+// 	response.json(data);
+// 	db.insert({ dream: request.body.newDream });
+// });
 
-// receive the added dream from webpage
+// receive the added location from webpage and insert to database
 app.post("/location", function(request, response) {
 	const data = { status: "success", lat: request.body.lat, lon: request.body.lon };
 	response.json(data);
-	db.insert({ lat: request.body.lat, lon: request.body.lon });
+	db.insert({ lat: request.body.lat, lon: request.body.lon, date: request.body.date });
 	console.log(data);
 });
+
+// receive the request to delete the database and deletes it
+app.post("/delete", function(request, response) {
+	const data = { status: "successfully deleted" };
+
+	response.json(data);
+	if (request.body.toDo == "delete") {
+		deleteDatabase();
+	}
+	console.log("deleted");
+});
+
+// db.remove({}, { multi: true }, function(err, numRemoved) {
+// 	db.loadDatabase(function(err) {
+// 		// done
+// 	});
+// });
+
+function deleteDatabase() {
+	db.remove({}, { multi: true }, function(err, numRemoved) {
+		db.loadDatabase(function(err) {
+			// done
+		});
+	});
+}
