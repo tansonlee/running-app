@@ -4,12 +4,19 @@
 	box-sizing: border-box;
 	margin: 0px;
 	padding: 0px;
+	font-family: sans-serif;
+}
+
+header h1 {
+	text-align: center;
+	padding: 10px;
+	background-color: antiquewhite;
+	font-size: 40px;
 }
 
 .button {
 	background-color: aquamarine;
 	font-size: 40px;
-	font-family: sans-serif;
 	text-align: center;
 	width: 100px;
 	padding: 10px;

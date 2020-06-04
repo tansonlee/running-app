@@ -27,6 +27,42 @@ function distance(lat1, lon1, lat2, lon2) {
 	return d * 1000; // meters
 }
 
+function getCurrentDate() {
+	const months = [
+		"January",
+		"February",
+		"March",
+		"April",
+		"May",
+		"June",
+		"July",
+		"August",
+		"September",
+		"October",
+		"November",
+		"December"
+	];
+	const date = new Date();
+	const year = date.getFullYear().toString();
+	const month = months[date.getMonth()].toString();
+	const day = date.getDate().toString();
+	let hour = date.getHours();
+	let period;
+
+	if (hour > 12) {
+		hour = (hour % 12).toString();
+		period = "PM";
+	} else {
+		period = "AM";
+		hour = hour.toString();
+	}
+
+	const minute = date.getMinutes().toString();
+
+	// 3 June 2020 @3:35
+	return `${day} ${month} ${year} @${hour}:${minute}${period}`;
+}
+
 // // a helper function that creates a list item for a given dream
 // function appendNewDream(dream) {
 // 	const newListItem = document.createElement("li");
@@ -139,7 +175,7 @@ function distance(lat1, lon1, lat2, lon2) {
 // }
 
 async function logDistance(distance) {
-	const date = new Date();
+	const date = getCurrentDate();
 	const data = { distance, date };
 	console.log(data);
 
