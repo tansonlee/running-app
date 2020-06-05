@@ -1,6 +1,6 @@
 # Running App
 
-Online app can be accessed at: ___ link from glitch (will be inserted later)
+Online app can be accessed at: https://tansonlee-running-app-4.glitch.me/
 
 Online app which tracks runs
 * distance
