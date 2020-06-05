@@ -1,5 +1,3 @@
-/* this file is loaded by index.html and styles the page */
-
 * {
 	box-sizing: border-box;
 	margin: 0px;
@@ -7,23 +5,89 @@
 	font-family: sans-serif;
 }
 
+body {
+	background-image: linear-gradient(to left, #84a98c, #52796f);
+}
+
 header h1 {
 	text-align: center;
+	padding: 15px;
+	background-color: #cad2c5;
+	font-size: 50px;
+}
+
+.link-container {
+	text-align: center;
 	padding: 10px;
-	background-color: antiquewhite;
+	margin: 5px;
+	font-size: 20px;
+}
+
+a {
+	background-color: #354f527c;
+	padding: 10px 25px;
+	border-radius: 6px;
+	text-decoration: none;
+	color: black;
+}
+
+/* visited link */
+a:visited {
+	color: black;
+}
+
+/* mouse over link */
+a:hover {
+	background-color: #c4d4d648;
+}
+
+/* selected link */
+a:active {
+	background-color: #c4d4d648;
+}
+
+h2 {
+	font-size: 30px;
+	text-align: center;
+}
+
+h3 {
 	font-size: 40px;
+	text-align: center;
+}
+
+h3 span {
+	font-size: 70px;
+}
+
+.start-stop {
+	width: 250px;
+	margin: 0 auto;
+}
+
+.status {
+	font-size: 40px;
+	text-align: center;
+	color: rgba(255, 127, 80, 0.8);
+	padding: 10px;
+	margin: 5px;
+	font-weight: bold;
 }
 
 .button {
-	background-color: aquamarine;
-	font-size: 40px;
+	background-color: #354f527c;
+	font-size: 30px;
 	text-align: center;
-	width: 100px;
 	padding: 10px;
 	margin: 5px;
 	width: auto;
+	border-radius: 8px;
 }
 
 .button:hover {
 	cursor: pointer;
+}
+
+.button:active {
+	background-color: #c4d4d648;
 }

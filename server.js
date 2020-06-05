@@ -16,30 +16,17 @@ const db = new Datastore({ filename: "database.db", autoload: true });
 db.loadDatabase();
 
 // listen for requests :)
-const port = 8000;
+const port = process.env.PORT || 8000;
 const listener = app.listen(port, () => {
 	console.log("Your app is listening on port " + listener.address().port);
 });
-
-// // our default array of dreams
-// const dreams = [ "Find and count some sheep", "Climb a really tall mountain", "Wash the dishes" ];
-
-// dreams.forEach((dream) => {
-// 	db.insert({ dream: dream });
-// });
 
 // https://expressjs.com/en/starter/basic-routing.html
 app.get("/", (request, response) => {
 	response.sendFile(__dirname + "/public/index.html");
 });
 
-// // send the default array of dreams to webpage
-// app.get("/dreams", (request, response) => {
-// 	// express helps us take JS objects and send them as JSON
-// 	response.json(dreams);
-// });
-
-// send all the data from the database to webpage
+// send all the data from the database to webpage -- received at data.html
 app.get("/data", (request, response) => {
 	db.find({}, (err, data) => {
 		if (err) {
@@ -48,22 +35,6 @@ app.get("/data", (request, response) => {
 		}
 		response.json({ data });
 	});
-});
-
-// // receive the added dream from webpage
-// app.post("/dream", function(request, response) {
-// 	const data = { status: "success", dream: request.body.newDream };
-
-// 	response.json(data);
-// 	db.insert({ dream: request.body.newDream });
-// });
-
-// receive the added location from webpage and insert to database
-app.post("/location", function(request, response) {
-	const data = { status: "success", lat: request.body.lat, lon: request.body.lon };
-	response.json(data);
-	db.insert({ lat: request.body.lat, lon: request.body.lon, date: request.body.date });
-	console.log(data);
 });
 
 // receive the distance from webpage and insert to database
@@ -85,12 +56,7 @@ app.post("/delete", function(request, response) {
 	console.log("deleted");
 });
 
-// db.remove({}, { multi: true }, function(err, numRemoved) {
-// 	db.loadDatabase(function(err) {
-// 		// done
-// 	});
-// });
-
+// deletes all data in the database
 function deleteDatabase() {
 	db.remove({}, { multi: true }, function(err, numRemoved) {
 		db.loadDatabase(function(err) {

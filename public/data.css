@@ -1,7 +1,57 @@
+* {
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+	font-family: sans-serif;
+}
+
 .data-pack {
 	padding: 10px;
 	margin: 10px;
-	background-color: rgba(128, 0, 128, 0.3);
+	background-color: rgba(255, 255, 255, 0.6);
 	font-size: 20px;
 	font-family: sans-serif;
+	border-radius: 4px;
+	color: black;
+}
+
+body {
+	background-image: linear-gradient(to left, #84a98c, #52796f);
+}
+
+header h1 {
+	text-align: center;
+	padding: 15px;
+	background-color: #cad2c5;
+	font-size: 50px;
+}
+
+.link-container {
+	text-align: center;
+	padding: 10px;
+	margin: 5px;
+	font-size: 20px;
+}
+
+a {
+	background-color: #354f527c;
+	padding: 10px 25px;
+	border-radius: 6px;
+	text-decoration: none;
+	color: black;
+}
+
+/* visited link */
+a:visited {
+	color: black;
+}
+
+/* mouse over link */
+a:hover {
+	background-color: #c4d4d648;
+}
+
+/* selected link */
+a:active {
+	background-color: #c4d4d648;
 }
