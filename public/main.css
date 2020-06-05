@@ -6,13 +6,13 @@
 }
 
 body {
-	background-image: linear-gradient(to left, #84a98c, #52796f);
+	background-image: linear-gradient(to left, #a2ceab, #5f8b80);
 }
 
 header h1 {
 	text-align: center;
 	padding: 15px;
-	background-color: #cad2c5;
+	background-color: #e4f3db;
 	font-size: 50px;
 }
 
@@ -68,10 +68,11 @@ h3 span {
 .status {
 	font-size: 40px;
 	text-align: center;
-	color: rgba(255, 127, 80, 0.8);
+	color: rgb(255, 127, 80);
 	padding: 10px;
 	margin: 5px;
 	font-weight: bold;
+	text-shadow: black 0 0 3px;
 }
 
 .button {

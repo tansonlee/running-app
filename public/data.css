@@ -16,13 +16,13 @@
 }
 
 body {
-	background-image: linear-gradient(to left, #84a98c, #52796f);
+	background-image: linear-gradient(to left, #a2ceab, #5f8b80);
 }
 
 header h1 {
 	text-align: center;
 	padding: 15px;
-	background-color: #cad2c5;
+	background-color: #e4f3db;
 	font-size: 50px;
 }
 
