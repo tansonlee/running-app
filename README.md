@@ -7,4 +7,4 @@ Online app which tracks runs
 * time
 * pace
 
-This is all loaded into a database so all runs are saved.
+This is all loaded into a database so all runs are saved along with the date of the run.
