@@ -110,6 +110,8 @@ function returnLocation() {
 start_div.addEventListener("click", async () => {
 	// reset total dist to 0
 	totalDistance = 0;
+	distance_span.textContent = parseInt(totalDistance);
+
 	let previousPosition;
 
 	// say starting up then when a location is received, say run in progress

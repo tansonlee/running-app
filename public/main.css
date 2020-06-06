@@ -137,9 +137,9 @@ h3 span {
 }
 
 #start {
-	text-shadow: green 0 0 6px;
+	text-shadow: rgba(0, 255, 0, 0.2) 0 0 6px;
 }
 
 #stop {
-	text-shadow: red 0 0 6px;
+	text-shadow: rgba(255, 0, 0, 0.2) 0 0 6px;
 }

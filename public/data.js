@@ -28,7 +28,7 @@ async function showData() {
 		time_div.textContent = `Total Time: ${element.time}`;
 		pace_div.textContent = `Average Pace: ${element.pace}`;
 		date_div.textContent = `Date: ${element.date}`;
-		delete_div.src = "/trash2.png";
+		delete_div.src = "/trash.png";
 		delete_div.classList.add("trash");
 
 		root.append(distance_div, time_div, pace_div, date_div, delete_div);
