@@ -1,6 +1,7 @@
 console.log("hello world :o");
 let interval;
 let totalDistance = 0;
+const stopwatch = new Stopwatch();
 
 // cache the DOM
 const status_div = document.getElementById("status");
@@ -22,7 +23,7 @@ function distance(lat1, lon1, lat2, lon2) {
 	return d * 1000;
 }
 
-// returns the date in the form (3 June 2020 @3:35)
+// returns the date as a string in the form (3 June 2020 @3:35)
 function getCurrentDate() {
 	const months = [
 		"January",
@@ -43,8 +44,10 @@ function getCurrentDate() {
 	const month = months[date.getMonth()].toString();
 	const day = date.getDate().toString();
 	let hour = date.getHours();
-	let period;
+	let minute = date.getMinutes();
+	let period; // AM or PM
 
+	// convert from 24hr time to 12hr with the addition of a period (AM/PM)
 	if (hour > 12) {
 		hour = (hour % 12).toString();
 		period = "PM";
@@ -53,15 +56,20 @@ function getCurrentDate() {
 		hour = hour.toString();
 	}
 
-	const minute = date.getMinutes().toString();
+	// add a 0 in front of minute if less than 10
+	if (minute < 10) {
+		minute = `0${minute.toString()}`;
+	} else {
+		minute = minute.toString();
+	}
 
-	// 3 June 2020 @3:35
+	// 3 June 2020 @3:35PM
 	return `${day} ${month} ${year} @${hour}:${minute}${period}`;
 }
 
-async function logDistance(distance) {
+async function logDistance(distance, time) {
 	const date = getCurrentDate();
-	const data = { distance, date };
+	const data = { distance, date, time };
 	console.log(data);
 
 	const options = {
@@ -78,7 +86,7 @@ async function logDistance(distance) {
 	console.log(responseJSON);
 }
 
-// function that returns a lat lon object { lat: 50.2323, lon: 21.234234 }
+// function that returns a lat lon object { lat: 50.2323, lon: 21.234234 } in a PROMISE
 function returnLocation() {
 	const promise = new Promise((resolve, reject) => {
 		if ("geolocation" in navigator) {
@@ -108,6 +116,7 @@ start_div.addEventListener("click", async () => {
 	status_div.textContent = "Starting Up...";
 	let currentPosition = await returnLocation();
 	status_div.textContent = "Run in Progress";
+	stopwatch.start();
 
 	// every 3sec
 	interval = setInterval(async () => {
@@ -137,11 +146,15 @@ stop_div.addEventListener("click", () => {
 	clearInterval(interval);
 	console.log(totalDistance);
 
+	const time = stopwatch.returnTime();
+	const timeString = `${time.hours}:${time.minutes}:${time.seconds}`;
+
 	// sends the total distance to the server
-	logDistance(totalDistance);
+	logDistance(totalDistance, timeString);
 
 	// updates the status to Run complete
 	status_div.textContent = "Run Complete";
+	stopwatch.stop();
 });
 
 // sends a request to server to delete database

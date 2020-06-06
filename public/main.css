@@ -73,6 +73,7 @@ h3 span {
 	margin: 5px;
 	font-weight: bold;
 	text-shadow: black 0 0 3px;
+	border: none;
 }
 
 .button {
@@ -91,4 +92,12 @@ h3 span {
 
 .button:active {
 	background-color: #c4d4d648;
+}
+
+.time {
+	/* background-color: black; */
+	width: 250px;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 30px;
 }

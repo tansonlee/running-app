@@ -39,9 +39,9 @@ app.get("/data", (request, response) => {
 
 // receive the distance from webpage and insert to database
 app.post("/distance", function(request, response) {
-	const data = { status: "success", distance: request.body.distance };
+	const data = { status: "success", distance: request.body.distance, time: request.body.time };
 	response.json(data);
-	db.insert({ distance: request.body.distance, date: request.body.date });
+	db.insert({ distance: request.body.distance, date: request.body.date, time: request.body.time });
 	console.log(data);
 });
 
