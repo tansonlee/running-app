@@ -67,9 +67,9 @@ function getCurrentDate() {
 	return `${day} ${month} ${year} @${hour}:${minute}${period}`;
 }
 
-async function logDistance(distance, time) {
+async function logDistance(distance, time, pace) {
 	const date = getCurrentDate();
-	const data = { distance, date, time };
+	const data = { distance, date, time, pace };
 	console.log(data);
 
 	const options = {
@@ -149,8 +149,11 @@ stop_div.addEventListener("click", () => {
 	const time = stopwatch.returnTime();
 	const timeString = `${time.hours}:${time.minutes}:${time.seconds}`;
 
+	const pace = stopwatch.returnPace();
+	const paceString = `${pace.minutes}:${pace.seconds}`;
+
 	// sends the total distance to the server
-	logDistance(totalDistance, timeString);
+	logDistance(totalDistance, timeString, paceString);
 
 	// updates the status to Run complete
 	status_div.textContent = "Run Complete";

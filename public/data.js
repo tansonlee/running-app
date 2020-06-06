@@ -9,13 +9,15 @@ async function showData() {
 		root.setAttribute("class", "data-pack");
 		const distance_div = document.createElement("div");
 		const time_div = document.createElement("div");
+		const pace_div = document.createElement("div");
 		const date_div = document.createElement("div");
 
 		distance_div.textContent = `Total Distance: ${parseInt(element.distance)}m`;
 		time_div.textContent = `Total Time: ${element.time}`;
+		pace_div.textContent = `Average Pace: ${element.pace}`;
 		date_div.textContent = `Date: ${element.date}`;
 
-		root.append(distance_div, time_div, date_div);
+		root.append(distance_div, time_div, pace_div, date_div);
 		document.body.append(root);
 	});
 }
