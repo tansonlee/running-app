@@ -13,6 +13,7 @@
 	font-family: sans-serif;
 	border-radius: 4px;
 	color: black;
+	position: relative;
 }
 
 body {
@@ -54,4 +55,16 @@ a:hover {
 /* selected link */
 a:active {
 	background-color: #c4d4d648;
+}
+
+.trash {
+	width: 40px;
+	height: 50px;
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	background-color: #608376;
+	padding: 5px;
+	border-radius: 4px;
+	box-shadow: black 0 0 2px;
 }

@@ -54,6 +54,7 @@ h2 {
 h3 {
 	font-size: 40px;
 	text-align: center;
+	margin-bottom: 10px;
 }
 
 h3 span {
@@ -113,7 +114,7 @@ h3 span {
 	position: absolute;
 	text-align: left;
 	width: 90px;
-	left: calc(55% + 4px);
+	left: calc(55% + 2px);
 	font-size: 30px;
 }
 
@@ -133,4 +134,12 @@ h3 span {
 	margin-left: -3px;
 	top: -10px;
 	border-radius: 8px;
+}
+
+#start {
+	text-shadow: green 0 0 6px;
+}
+
+#stop {
+	text-shadow: red 0 0 6px;
 }

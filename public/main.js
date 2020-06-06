@@ -7,7 +7,7 @@ const stopwatch = new Stopwatch();
 const status_div = document.getElementById("status");
 const start_div = document.getElementById("start");
 const stop_div = document.getElementById("stop");
-const delete_div = document.getElementById("delete");
+// const delete_div = document.getElementById("delete");
 const distance_span = document.getElementById("distance");
 
 // given the lat lon of two pts, returns the distance between in METERS
@@ -160,20 +160,20 @@ stop_div.addEventListener("click", () => {
 	stopwatch.stop();
 });
 
-// sends a request to server to delete database
-delete_div.addEventListener("click", async () => {
-	const data = { toDo: "delete" };
+// // sends a request to server to delete database
+// delete_div.addEventListener("click", async () => {
+// 	const data = { toDo: "delete" };
 
-	const options = {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json"
-		},
-		body: JSON.stringify(data)
-	};
+// 	const options = {
+// 		method: "POST",
+// 		headers: {
+// 			"Content-Type": "application/json"
+// 		},
+// 		body: JSON.stringify(data)
+// 	};
 
-	// send the added dream to server
-	const response = await fetch("/delete", options);
-	const responseJSON = await response.json();
-	console.log(responseJSON);
-});
+// 	// send the added dream to server
+// 	const response = await fetch("/delete", options);
+// 	const responseJSON = await response.json();
+// 	console.log(responseJSON);
+// });
