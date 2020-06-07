@@ -1,7 +1,8 @@
+const deleteAll_div = document.getElementById("delete");
 let entries = [];
 
 function removeFadeOut(el, speed) {
-	var seconds = speed / 1000;
+	const seconds = speed / 1000;
 	el.style.transition = "opacity " + seconds + "s ease";
 
 	el.style.opacity = 0;
@@ -55,6 +56,7 @@ async function main() {
 	});
 }
 
+// removes a single entry by date
 async function remove(entry) {
 	const dateContent = entry.parentNode.childNodes[3].textContent;
 	const date = dateContent.slice(6);
@@ -73,5 +75,27 @@ async function remove(entry) {
 	const responseJSON = await response.json();
 	console.log(responseJSON);
 }
+
+// sends a request to server to delete database
+deleteAll_div.addEventListener("click", async () => {
+	const data = { action: "delete" };
+
+	const options = {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(data)
+	};
+
+	const response = await fetch("/delete", options);
+	const responseJSON = await response.json();
+	console.log(responseJSON);
+
+	entries.forEach((entry) => {
+		const parent = entry.parentNode;
+		removeFadeOut(parent, 500);
+	});
+});
 
 main();

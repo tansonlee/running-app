@@ -40,22 +40,26 @@ app.get("/data", (request, response) => {
 // receive the distance from webpage and insert to database
 app.post("/distance", function(request, response) {
 	const data = request.body;
-	const reply = { status: "success", distance: data.distance, time: data.time, pace: data.pace };
+	const reply = {
+		status: "success",
+		action: "recieve log",
+		distance: data.distance,
+		time: data.time,
+		pace: data.pace
+	};
 	response.json(reply);
 	db.insert({ distance: data.distance, time: data.time, pace: data.pace, date: data.date });
 	console.log(reply);
 });
 
-// // receive the request to delete the database and deletes it
-// app.post("/delete", function(request, response) {
-// 	const data = { status: "successfully deleted" };
+// receive the request to delete the database and deletes it
+app.post("/delete", function(request, response) {
+	const data = { status: "success", action: "delete all" };
+	response.json(data);
+	deleteDatabase();
 
-// 	response.json(data);
-// 	if (request.body.toDo == "delete") {
-// 		deleteDatabase();
-// 	}
-// 	console.log("deleted");
-// });
+	console.log("deleted");
+});
 
 // receive the request to delete an entry
 app.post("/deleteentry", function(request, response) {
@@ -68,14 +72,14 @@ app.post("/deleteentry", function(request, response) {
 	deleteEntry(data.date);
 });
 
-// // deletes all data in the database
-// function deleteDatabase() {
-// 	db.remove({}, { multi: true }, function(err, numRemoved) {
-// 		db.loadDatabase(function(err) {
-// 			// done
-// 		});
-// 	});
-// }
+// deletes all data in the database
+function deleteDatabase() {
+	db.remove({}, { multi: true }, function(err, numRemoved) {
+		db.loadDatabase(function(err) {
+			// done
+		});
+	});
+}
 
 function deleteEntry(date) {
 	db.remove({ date: date }, {}, function(err, numRemoved) {
