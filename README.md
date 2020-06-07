@@ -1,7 +1,7 @@
 # Running App
 My first fullstack project!
 
-Online app can be accessed at: https://tansonlee-running-app-4.glitch.me/
+Online app can be accessed at: https://tansonlee-running-app.glitch.me
 
 Online app which tracks runs
 * distance
