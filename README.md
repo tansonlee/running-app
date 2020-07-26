@@ -2,7 +2,12 @@
 
 ### A web application to track running progress.
 
-My first fullstack project. Front-end made with JavaScript, CSS and HTML. Back-end made with node.js and express. Database made with nedb. Deployed to Heroku and glitch
+Web app can be accessed at:<br>
+https://running-app-tanson.herokuapp.com/<br>
+or<br>
+https://tansonlee-running-app.glitch.me
+
+My first fullstack project. Front-end made with JavaScript, CSS and HTML. Back-end made with Node.js and eEpress. Database made with nedb. Deployed to Heroku and Glitch.
 
 Online app which tracks several measure for a run.
 * total distance
@@ -10,7 +15,7 @@ Online app which tracks several measure for a run.
 * pace
 * date
 
-App contains a database for persistance for usage in several sessions
+App contains a database for persistance for usage across several sessions
 
 Before a run: <br>
 <img src="images/before-run.png" width="250px">
@@ -23,8 +28,3 @@ Completed a run:<br>
 
 List of all runs:<br>
 <img src="images/database.png" width="250px">
-
-Online app can be accessed at:<br>
-https://running-app-tanson.herokuapp.com/<br>
-or<br>
-https://tansonlee-running-app.glitch.me
