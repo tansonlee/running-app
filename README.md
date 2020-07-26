@@ -12,19 +12,22 @@ Online app which tracks several measure for a run.
 
 App contains a database for persistance for usage in several sessions
 
-Before a run:
+Before a run: <br>
 <img src="images/before-run.png" width="250px">
 
-During a run:
+During a run:<br>
 <img src="images/during-run.png" width="250px">
 
-Completed a run:
+Completed a run:<br>
 <img src="images/run-complete.png" width="250px">
 
-List of all runs:
+List of all runs:<br>
 <img src="images/database.png" width="250px">
 
-Online app can be accessed at: 
+Online app can be accessed at:
+
 https://running-app-tanson.herokuapp.com/
+
 or
+
 https://tansonlee-running-app.glitch.me
