@@ -24,10 +24,7 @@ Completed a run:<br>
 List of all runs:<br>
 <img src="images/database.png" width="250px">
 
-Online app can be accessed at:
-
-https://running-app-tanson.herokuapp.com/
-
-or
-
+Online app can be accessed at:<br>
+https://running-app-tanson.herokuapp.com/<br>
+or<br>
 https://tansonlee-running-app.glitch.me
