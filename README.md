@@ -12,9 +12,17 @@ Online app which tracks several measure for a run.
 
 App contains a database for persistance for usage in several sessions
 
-<img src="images/img1" width="250px">
-<img src="images/img2" width="250px">
-<img src="images/img3" width="250px">
+Before a run:
+<img src="images/before-run.png" width="250px">
+
+During a run:
+<img src="images/during-run.png" width="250px">
+
+Completed a run:
+<img src="images/run-complete.png" width="250px">
+
+List of all runs:
+<img src="images/database.png" width="250px">
 
 Online app can be accessed at: 
 https://running-app-tanson.herokuapp.com/
