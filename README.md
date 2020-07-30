@@ -9,7 +9,7 @@ https://tansonlee-running-app.glitch.me
 
 My first fullstack project. Front-end made with JavaScript, CSS and HTML. Back-end made with Node.js and eEpress. Database made with nedb. Deployed to Heroku and Glitch.
 
-Online app which tracks several measure for a run.
+Online app which tracks several measures for a run.
 * total distance
 * total time
 * pace
